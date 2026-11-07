@@ -1,3 +1,4 @@
+
 pipeline {
     agent any
 
@@ -10,25 +11,25 @@ pipeline {
 
         stage('Verify Python') {
             steps {
-                bat 'python --version'
+                bat '"C:/Users/RAKESH/AppData/Local/Programs/Python/Python310/python.exe" --version'
             }
         }
 
         stage('Compile') {
             steps {
-                bat 'python -m py_compile app.py'
+                bat '"C:/Users/RAKESH/AppData/Local/Programs/Python/Python310/python.exe" -m py_compile app.py'
             }
         }
 
         stage('Test') {
             steps {
-                bat 'python -m unittest -v test_app'
+                bat '"C:/Users/RAKESH/AppData/Local/Programs/Python/Python310/python.exe" -m unittest -v test_app'
             }
         }
 
         stage('Run Application') {
             steps {
-                bat 'python app.py'
+                bat '"C:/Users/RAKESH/AppData/Local/Programs/Python/Python310/python.exe" app.py'
             }
         }
     }
