@@ -1,0 +1,44 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('Checkout') {
+            steps {
+                checkout scm
+            }
+        }
+
+        stage('Verify Python') {
+            steps {
+                bat 'python --version'
+            }
+        }
+
+        stage('Compile') {
+            steps {
+                bat 'python -m py_compile app.py'
+            }
+        }
+
+        stage('Test') {
+            steps {
+                bat 'python -m unittest -v test_app'
+            }
+        }
+
+        stage('Run Application') {
+            steps {
+                bat 'python app.py'
+            }
+        }
+    }
+
+    post {
+        success {
+            echo 'Build Successfully Completed!'
+        }
+        failure {
+            echo 'Build Failed!'
+        }
+    }
+}
